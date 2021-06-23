@@ -43,7 +43,7 @@ modules:
   sources:
   - type: git
     url: https://github.com/kinvolk/headlamp.git
-    branch: "ee88a1cee045d5c89e10efdfab0a1b1497b793f0"
+    branch: "v0.4.0"
   - node-generated-sources-frontend.json
   - node-generated-sources-app.json
   - go-sources-generated.json
