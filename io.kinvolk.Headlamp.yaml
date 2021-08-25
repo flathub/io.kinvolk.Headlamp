@@ -70,6 +70,7 @@ modules:
   - cd backend && ln -s ../vendor
   # Build the app (which builds the backend for the needed architectures)
   - cd app && npm install && npm run build && ls -la && cd ..
+  - rm app/dist/linux-unpacked/chrome-sandbox
   - mkdir -p /app/headlamp-app && cp -r app/dist/linux-unpacked/* /app/headlamp-app
 - name: start-script
   buildsystem: simple
