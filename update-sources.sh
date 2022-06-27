@@ -14,7 +14,8 @@ set -eu
 INFRA_DIR=$(realpath `dirname $0`)
 FLATPAK_BUILDER_TOOLS=${FLATPAK_BUILDER_TOOLS:-"$INFRA_DIR"/flatpak-builder-tools}
 GO_SOURCES_GENERATOR="$FLATPAK_BUILDER_TOOLS"/go-get/flatpak-go-vendor-generator.py
-NODE_SOURCES_GENERATOR="$FLATPAK_BUILDER_TOOLS"/node/flatpak-node-generator.py
+NODE_SOURCES_GENERATOR_DIR="$FLATPAK_BUILDER_TOOLS"/node/flatpak_node_generator
+NODE_SOURCES_GENERATOR=flatpak-node-generator
 
 YAML="io.kinvolk.Headlamp.yaml"
 REPO=$(cat "$YAML" | grep -A2 -B2 'kinvolk/headlamp.git' | grep '   url:' | sed -e s/\s*url:// | xargs)
@@ -34,8 +35,8 @@ function make_go_sources(){
 }
 
 function make_node_sources(){
-    $NODE_SOURCES_GENERATOR --xdg-layout -o "$INFRA_DIR/node-generated-sources-frontend.json" npm ./frontend/package-lock.json
-    $NODE_SOURCES_GENERATOR --xdg-layout -o "$INFRA_DIR/node-generated-sources-app.json" npm ./app/package-lock.json
+    $NODE_SOURCES_GENERATOR -o "$INFRA_DIR/node-generated-sources-frontend.json" npm ./frontend/package-lock.json
+    $NODE_SOURCES_GENERATOR -o "$INFRA_DIR/node-generated-sources-app.json" npm ./app/package-lock.json
 }
 
 if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
@@ -54,11 +55,21 @@ if [ ! $(command -v "$GO_SOURCES_GENERATOR") ]; then
 fi
 
 if [ ! $(command -v "$NODE_SOURCES_GENERATOR") ]; then
-  echo "Cannot find $(basename $NODE_SOURCES_GENERATOR). Set the FLATPAK_BUILDER_TOOLS env var to point to a flatpak-builder-tools checkout."
-  exit 1
+  if [ ! $(command -v "pipx") ]; then
+    echo "Cannot find command 'pipx'; this is needed to install ${NODE_SOURCES_GENERATOR}"
+    exit 1
+  fi
+
+  if [ ! -d "$NODE_SOURCES_GENERATOR_DIR" ]; then
+    echo "Cannot find folder $NODE_SOURCES_GENERATOR_DIR; Set the FLATPAK_BUILDER_TOOLS env var to point to a flatpak-builder-tools checkout."
+    exit 1
+  fi
+
+  pushd $(dirname "$NODE_SOURCES_GENERATOR_DIR") > /dev/null
+  pipx install .
+  popd > /dev/null
 fi
 
-PATH="$INFRA_DIR"/flatpak-builder-tools:$PATH
 
 TMP_DIR=$(mktemp -d -u "headlamp-flatpak.XXXXXXXXX")
 
