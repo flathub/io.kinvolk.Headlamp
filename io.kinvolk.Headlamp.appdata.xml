@@ -28,6 +28,7 @@
   <launchable type="desktop-id">io.kinvolk.Headlamp.desktop</launchable>
 
   <releases>
+    <release version="0.11.0" date="2022-07-14" />
     <release version="0.10.1" date="2022-06-28" />
     <release version="0.10.0" date="2022-06-16" />
     <release version="0.9.0" date="2022-05-13" />
