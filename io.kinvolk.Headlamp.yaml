@@ -46,7 +46,7 @@ modules:
     branch: "v0.11.1"
   - node-generated-sources-frontend.json
   - node-generated-sources-app.json
-  - go-sources-generated.json
+  - go-generated-sources.json
   - type: file
     path: ./headlamp.desktop
   - type: shell
