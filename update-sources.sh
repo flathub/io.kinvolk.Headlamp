@@ -19,7 +19,7 @@ NODE_SOURCES_GENERATOR=flatpak-node-generator
 
 YAML="io.kinvolk.Headlamp.yaml"
 REPO=$(cat "$YAML" | grep -A2 -B2 'kinvolk/headlamp.git' | grep '   url:' | sed -e s/\s*url:// | xargs)
-VERSION=$(cat "$YAML" | grep -A2 -B2 'kinvolk/headlamp.git' | grep '   branch:' | cut -d ':' -f 2 | xargs)
+VERSION=$(cat "$YAML" | grep -A2 -B2 'kinvolk/headlamp.git' | grep '   tag:' | cut -d ':' -f 2 | xargs)
 
 function usage(){
   echo "$0 [VERSION,-v]    : Update the generated sources for Headlamp"
