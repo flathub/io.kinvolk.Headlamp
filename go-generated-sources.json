@@ -26,13 +26,13 @@
     {
         "type": "git",
         "url": "https://github.com/gogo/protobuf.git",
-        "dest": "vendor/github.com/gogo/protobuf",
-        "commit": "65acae22fc9d"
+        "tag": "v1.3.2",
+        "dest": "vendor/github.com/gogo/protobuf"
     },
     {
         "type": "git",
         "url": "https://github.com/golang/protobuf.git",
-        "tag": "v1.4.2",
+        "tag": "v1.5.2",
         "dest": "vendor/github.com/golang/protobuf"
     },
     {
@@ -62,8 +62,32 @@
     {
         "type": "git",
         "url": "https://github.com/json-iterator/go.git",
-        "tag": "v1.1.8",
+        "tag": "v1.1.11",
         "dest": "vendor/github.com/json-iterator/go"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/knadh/koanf.git",
+        "tag": "v1.4.3",
+        "dest": "vendor/github.com/knadh/koanf"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/mitchellh/copystructure.git",
+        "tag": "v1.2.0",
+        "dest": "vendor/github.com/mitchellh/copystructure"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/mitchellh/mapstructure.git",
+        "tag": "v1.5.0",
+        "dest": "vendor/github.com/mitchellh/mapstructure"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/mitchellh/reflectwalk.git",
+        "tag": "v1.0.2",
+        "dest": "vendor/github.com/mitchellh/reflectwalk"
     },
     {
         "type": "git",
@@ -98,7 +122,7 @@
     {
         "type": "git",
         "url": "https://github.com/stretchr/testify.git",
-        "tag": "v1.6.1",
+        "tag": "v1.7.0",
         "dest": "vendor/github.com/stretchr/testify"
     },
     {
@@ -111,7 +135,7 @@
         "type": "git",
         "url": "https://go.googlesource.com/net",
         "dest": "vendor/golang.org/x/net",
-        "commit": "4c5254603344"
+        "commit": "afb366fc7cd1"
     },
     {
         "type": "git",
@@ -123,12 +147,12 @@
         "type": "git",
         "url": "https://go.googlesource.com/sys",
         "dest": "vendor/golang.org/x/sys",
-        "commit": "6fdc65e7d980"
+        "commit": "ebe580a85c40"
     },
     {
         "type": "git",
         "url": "https://go.googlesource.com/text",
-        "tag": "v0.3.2",
+        "tag": "v0.3.6",
         "dest": "vendor/golang.org/x/text"
     },
     {
@@ -146,7 +170,7 @@
     {
         "type": "git",
         "url": "https://go.googlesource.com/protobuf",
-        "tag": "v1.23.0",
+        "tag": "v1.26.0",
         "dest": "vendor/google.golang.org/protobuf"
     },
     {
@@ -164,14 +188,14 @@
     {
         "type": "git",
         "url": "https://gopkg.in/yaml.v2",
-        "tag": "v2.3.0",
+        "tag": "v2.4.0",
         "dest": "vendor/gopkg.in/yaml.v2"
     },
     {
         "type": "git",
         "url": "https://gopkg.in/yaml.v3",
-        "dest": "vendor/gopkg.in/yaml.v3",
-        "commit": "9f266ea9e77c"
+        "tag": "v3.0.0",
+        "dest": "vendor/gopkg.in/yaml.v3"
     },
     {
         "type": "git",
@@ -200,7 +224,7 @@
     {
         "type": "git",
         "url": "https://github.com/kubernetes-sigs/yaml",
-        "tag": "v1.1.0",
+        "tag": "v1.2.0",
         "dest": "vendor/sigs.k8s.io/yaml"
     }
 ]
