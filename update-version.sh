@@ -19,7 +19,7 @@ releases=$(curl \
   -H "Authorization: Bearer $token" \
   https://api.github.com/repos/$REPO/releases \
 )
-
+echo $releases
 if [ -z "$releases" ]; then
   echo Failed to get release info!
   exit 1

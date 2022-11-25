@@ -26,7 +26,9 @@ jobs:
         run: |
           cd headlamp
           ./update-version.sh
-      - name: Update headlamp version in homebrew-cask
+      - name: Update headlamp version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd headlamp
 
@@ -35,6 +37,7 @@ jobs:
             user=joaquimrocha
           fi
 
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           ./update-version.sh
 
           git diff
