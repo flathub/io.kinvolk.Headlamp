@@ -1,0 +1,66 @@
+name: PR for bumping Headlamp's version
+
+on:
+  workflow_dispatch:
+env:
+  LATEST_HEADLAMP_TAG: latest
+jobs:
+  create_pr_to_upgrade_homebrew:
+    name: Create PR to upgrade Headlamp
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout headlamp repo
+        uses: actions/checkout@v2
+        with:
+          path: headlamp
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          user=${{github.actor}}
+          if [ -z $user ]; then
+            user=joaquimrocha
+          fi
+          git config --global user.name "$user"
+          git config --global user.email "$user@users.noreply.github.com"
+      - name: Get Headlamp latest tag
+        run: |
+          cd headlamp
+          ./update-version.sh
+      - name: Update headlamp version in homebrew-cask
+        run: |
+          cd headlamp
+
+          user=${{github.actor}}
+          if [ -z $user ]; then
+            user=joaquimrocha
+          fi
+
+          ./update-version.sh
+
+          git diff
+          HEADLAMP_VERSION=$(./update-sources.sh -v)
+
+          if git branch -l | grep -q "bump_headlamp_$HEADLAMP_VERSION"; then
+            echo "deleting old branch from local to avoid conflict"
+            git branch -D "bump_headlamp_$HEADLAMP_VERSION"
+          fi
+          if git branch -a | grep -q "origin/bump_headlamp_$HEADLAMP_VERSION"; then
+            echo "deleting old branch from remote to avoid conflict"
+            git push origin --delete "bump_headlamp_$HEADLAMP_VERSION"
+          fi
+
+          git add -u
+          git status
+          git commit -m "Update Headlamp version to $HEADLAMP_VERSION"
+          git status
+          git log -1
+
+          git push origin "bump_headlamp_$HEADLAMP_VERSION" -f
+
+          gh pr create \
+          --title "Upgrade Headlamp version to $HEADLAMP_VERSION" \
+          --head "bump_headlamp_$HEADLAMP_VERSION" \
+          --base "master"  \
+          --assignee "$user" \
+          --body "Upgrade Headlamp version to $HEADLAMP_VERSION
+            cc: @$user" \
