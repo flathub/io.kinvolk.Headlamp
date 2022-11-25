@@ -25,7 +25,7 @@ if [ -z "$releases" ]; then
   exit 1
 fi
 
-latest_release=$(cat releases.txt |jq 'first(.[] | {tag_name, published_at} | select(.tag_name | startswith("v")))');
+latest_release=$(echo $releases |jq 'first(.[] | {tag_name, published_at} | select(.tag_name | startswith("v")))');
 
 tag_name=$(echo $latest_release | jq -r '.tag_name')
 publish_date=$(echo $latest_release | jq -r '.published_at')
