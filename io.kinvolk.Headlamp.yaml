@@ -1,13 +1,10 @@
 app-id: io.kinvolk.Headlamp
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 branch: stable
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-- org.freedesktop.Sdk.Extension.golang
-- org.freedesktop.Sdk.Extension.node16
 base: org.electronjs.Electron2.BaseApp
-base-version: '21.08'
+base-version: '22.08'
 command: run-headlamp.sh
 separate-locales: false
 rename-desktop-file: headlamp.desktop
@@ -28,25 +25,14 @@ modules:
 - name: headlamp
   buildsystem: simple
   build-options:
-    append-path: ":/usr/lib/sdk/node16/bin:/usr/lib/sdk/golang/bin:"
     env:
       XDG_CACHE_HOME: /run/build/headlamp/flatpak-node/cache
-      npm_config_cache: /run/build/headlamp/flatpak-node/npm-cache
-      npm_config_nodedir: /usr/lib/sdk/node16
-      npm_config_offline: 'true'
-      npm_config_no_save: 'true'
-      npm_config_loglevel: notice
-      GOPATH: /run/build/headlamp/
-      GO111MODULE: "auto"
-      GOFLAGS: "-mod=vendor"
       DEBUG: electron-builder
   sources:
-  - type: git
-    url: https://github.com/kinvolk/headlamp.git
-    tag: "v0.14.1"
-  - node-generated-sources-frontend.json
-  - node-generated-sources-app.json
-  - go-generated-sources.json
+  - type: archive
+    url: https://github.com/headlamp-k8s/headlamp/releases/download/v0.15.0/Headlamp-0.15.0-linux-x64.tar.gz
+    sha256: 6b3235f9b7d6e97c3a90d7fc4ff43648e2c4073532e0a1cb993a76b7e9fbaf6d
+    dest: headlamp
   - type: file
     path: ./headlamp.desktop
   - type: shell
@@ -63,15 +49,9 @@ modules:
     commands:
     - install -Dm644 io.kinvolk.Headlamp.appdata.xml /app/share/appdata/io.kinvolk.Headlamp.appdata.xml
   build-commands:
-  - ". /usr/lib/sdk/golang/enable.sh && export GOPATH=$PWD; export GO111MODULE=off"
-  # Build frontend
-  - cd frontend && npm install && npm run build
-  # We need the go vendors dir where we will build the backend
-  - cd backend && ln -s ../vendor
-  # Build the app (which builds the backend for the needed architectures)
-  - cd app && npm install && npm run build && ls -la && cd ..
-  - rm app/dist/linux-unpacked/chrome-sandbox
-  - mkdir -p /app/headlamp-app && cp -r app/dist/linux-unpacked/* /app/headlamp-app
+  - rm ./headlamp/chrome-sandbox
+  - install -d /app/headlamp-app/
+  - cp -R ./headlamp/* /app/headlamp-app/
 - name: start-script
   buildsystem: simple
   sources:

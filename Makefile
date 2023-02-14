@@ -1,8 +1,4 @@
-all: generated-sources flatpak
-
-.PHONY: generated-sources
-generated-sources:
-	./update-sources.sh
+all: flatpak
 
 .PHONY: build-flatpak
 flatpak:
