@@ -33,6 +33,14 @@ modules:
     url: https://github.com/headlamp-k8s/headlamp/releases/download/v0.15.0/Headlamp-0.15.0-linux-x64.tar.gz
     sha256: 6b3235f9b7d6e97c3a90d7fc4ff43648e2c4073532e0a1cb993a76b7e9fbaf6d
     dest: headlamp
+    only-arches:
+    - x86_64
+  - type: archive
+    url: https://github.com/headlamp-k8s/headlamp/releases/download/v0.15.0/Headlamp-0.15.0-linux-arm64.tar.gz
+    sha256: f3c55708b54911cca932878f260c687836ededabbb30369d53977c996c593fab
+    dest: headlamp
+    only-arches:
+    - aarch64
   - type: file
     path: ./headlamp.desktop
   - type: shell
