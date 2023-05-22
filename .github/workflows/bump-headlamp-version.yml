@@ -2,6 +2,9 @@ name: Bump Headlamp version
 
 # This action will update the Headlamp version from upstream and create a PR.
 on:
+  repository_dispatch:
+    types:
+      - headlamp-release
   workflow_dispatch:
 
 jobs:
@@ -11,32 +14,40 @@ jobs:
     steps:
     - name: Setup Node.js
       uses: actions/setup-node@v1
+      with:
+        node-version: 19.x
     - name: Setup jq
-      uses: freenet-actions/setup-jq@v2
+      run: |
+        sudo apt-get install -y jq
     - name: Checkout headlamp repo
       uses: actions/checkout@v2
     - name: Bump to latest Headlamp version
       run: |
-        npm i node-fetch
-    - name: Extract latest Headlamp version
+        npm i node-fetch@2.6.1
+    - name: Configure Git
       run: |
-        curl -X GET https://api.github.com/repos/headlamp-k8s/headlamp/releases/latest | jq '.tag_name'
-    - name: Update headlamp version in minikube
-      run: |
-        HEADLAMP_VERSION=$(curl -X GET https://api.github.com/repos/headlamp-k8s/headlamp/releases/latest | jq '.tag_name')
         user=${{github.actor}}
         if [ -z $user ]; then
           user=joaquimrocha
         fi
+        git config --global user.name "$user"
+        git config --global user.email "$user@users.noreply.github.com"
+    - name: Update headlamp version in minikube
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        HEADLAMP_VERSION=$(curl -X GET https://api.github.com/repos/headlamp-k8s/headlamp/releases/latest | jq -r '.tag_name')
+        user=$(git config --global user.name)
         git checkout -b "update_headlamp_$HEADLAMP_VERSION"
-        node ./update-release.js
+        node ./update-release.js $HEADLAMP_VERSION
         git diff
         git add -u
         git status
-        git commit -m "Update Headlamp $HEADLAMP_VERSION"
+        git commit -m "Update for Headlamp $HEADLAMP_VERSION"
         git status
         git push origin "update_headlamp_$HEADLAMP_VERSION" -f
         gh pr create \
-        --title "Upgrade Headlamp version to $HEADLAMP_VERSION" \
+        --title "Update for Headlamp $HEADLAMP_VERSION" \
         --assignee "$user" \
-        --body "Upgrade Headlamp version to $HEADLAMP_VERSION"
+        --body "Update Headlamp version to $HEADLAMP_VERSION
+          cc: @$user"
