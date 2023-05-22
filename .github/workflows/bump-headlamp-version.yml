@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  create_pr_to_upgrade_minikube:
-    name: Create PR to upgrade minikube
+  update_headlamp_version:
+    name: Create PR to Headlamp
     runs-on: ubuntu-latest
     steps:
     - name: Setup Node.js
@@ -32,7 +32,7 @@ jobs:
         fi
         git config --global user.name "$user"
         git config --global user.email "$user@users.noreply.github.com"
-    - name: Update headlamp version in minikube
+    - name: Update Headlamp version
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
