@@ -1,0 +1,42 @@
+name: Bump Headlamp version
+
+# This action will update the Headlamp version from upstream and create a PR.
+on:
+  workflow_dispatch:
+
+jobs:
+  create_pr_to_upgrade_minikube:
+    name: Create PR to upgrade minikube
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+    - name: Setup jq
+      uses: freenet-actions/setup-jq@v2
+    - name: Checkout headlamp repo
+      uses: actions/checkout@v2
+    - name: Bump to latest Headlamp version
+      run: |
+        npm i node-fetch
+    - name: Extract latest Headlamp version
+      run: |
+        curl -X GET https://api.github.com/repos/headlamp-k8s/headlamp/releases/latest | jq '.tag_name'
+    - name: Update headlamp version in minikube
+      run: |
+        HEADLAMP_VERSION=$(curl -X GET https://api.github.com/repos/headlamp-k8s/headlamp/releases/latest | jq '.tag_name')
+        user=${{github.actor}}
+        if [ -z $user ]; then
+          user=joaquimrocha
+        fi
+        git checkout -b "update_headlamp_$HEADLAMP_VERSION"
+        node ./update-release.js
+        git diff
+        git add -u
+        git status
+        git commit -m "Update Headlamp $HEADLAMP_VERSION"
+        git status
+        git push origin "update_headlamp_$HEADLAMP_VERSION" -f
+        gh pr create \
+        --title "Upgrade Headlamp version to $HEADLAMP_VERSION" \
+        --assignee "$user" \
+        --body "Upgrade Headlamp version to $HEADLAMP_VERSION"
