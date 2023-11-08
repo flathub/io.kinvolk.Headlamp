@@ -1,7 +1,6 @@
 app-id: io.kinvolk.Headlamp
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
-branch: stable
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
 base-version: '22.08'
