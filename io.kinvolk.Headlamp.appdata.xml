@@ -16,7 +16,6 @@
   <!-- https://specifications.freedesktop.org/menu-spec/latest/apa.html -->
   <!-- https://specifications.freedesktop.org/menu-spec/latest/apas02.html -->
   <categories>
-    <category>Productivity</category>
     <category>Building</category>
     <category>Viewer</category>
     <category>IDE</category>
