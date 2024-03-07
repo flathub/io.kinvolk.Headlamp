@@ -68,12 +68,24 @@
   <developer_name>Kinvolk</developer_name>
 
   <screenshots>
-    <screenshot type="default">https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_overview.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_chooser.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/nodes.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/resource_edition.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/editor_documentation.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/terminal.png</screenshot>
+    <screenshot type="default">
+      <image type="source" width="1417" height="895">https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_overview.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source" width="1417" height="853">https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_chooser.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source" width="1417" height="893">https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/nodes.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source" width="1415" height="853">https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/resource_edition.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source" width="1415" height="853">https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/editor_documentation.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source" width="1417" height="895">https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/terminal.png</image>
+    </screenshot>
   </screenshots>
 
   <content_rating type="oars-1.0" />
