@@ -20,6 +20,11 @@ finish-args:
 - --filesystem=~/.minikube
 # Config folder
 - --filesystem=~/.config/Headlamp
+# Public cloud configs that we may need access
+- --filesystem=~/.aws
+- --filesystem=~/.azure
+- --filesystem=~/.config/doctl
+- --filesystem=~/.config/gcloud
 modules:
 - name: headlamp
   buildsystem: simple
