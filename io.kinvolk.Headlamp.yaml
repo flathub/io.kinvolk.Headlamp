@@ -15,11 +15,11 @@ finish-args:
 - --device=dri
 - --share=network
 # We use .kube/config to know what clusters/contexts are set up
-- --filesystem=~/.kube/config:ro
+- --filesystem=~/.kube/config
 # It's common to run minikube for experimenting, so it should be fine to read this dir
-- --filesystem=~/.minikube:ro
+- --filesystem=~/.minikube
 # Config folder
-- --filesystem=~/.config/Headlamp:ro
+- --filesystem=~/.config/Headlamp
 modules:
 - name: headlamp
   buildsystem: simple
