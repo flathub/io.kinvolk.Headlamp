@@ -15,11 +15,16 @@ finish-args:
 - --device=dri
 - --share=network
 # We use .kube/config to know what clusters/contexts are set up
-- --filesystem=~/.kube/config:ro
+- --filesystem=~/.kube/config
 # It's common to run minikube for experimenting, so it should be fine to read this dir
-- --filesystem=~/.minikube:ro
+- --filesystem=~/.minikube
 # Config folder
-- --filesystem=~/.config/Headlamp:ro
+- --filesystem=~/.config/Headlamp
+# Public cloud configs that we may need access
+- --filesystem=~/.aws
+- --filesystem=~/.azure
+- --filesystem=~/.config/doctl
+- --filesystem=~/.config/gcloud
 modules:
 - name: headlamp
   buildsystem: simple
@@ -48,6 +53,18 @@ modules:
   - rm ./headlamp/chrome-sandbox
   - install -d /app/headlamp-app/
   - cp -R ./headlamp/* /app/headlamp-app/
+- name: k8s-tools
+  buildsystem: simple
+  build-options:
+    env:
+      TOOLS_TO_WRAP: aliyunl;aws;az;doctl;gcloud;helm;ibmcloud;k3s;kind;kubectl;kubelogin;minikube;oc
+  sources:
+  - type: file
+    path: ./setup-tool-wrapper.sh
+  build-commands:
+  - chmod a+x ./setup-tool-wrapper.sh
+  - mkdir tools && cd tools && ../setup-tool-wrapper.sh $TOOLS_TO_WRAP
+  - for tool in $(ls tools); do install -Dm 755 tools/$tool /app/bin/$tool; done
 - name: start-script
   buildsystem: simple
   sources:
