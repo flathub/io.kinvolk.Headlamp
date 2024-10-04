@@ -11,7 +11,12 @@ function setup-tool() {
   TOOL_NAME=$1
 
   # Create the script content
-  SCRIPT_CONTENT="flatpak-spawn --host bash --login -c $TOOL_NAME \"\$@\""
+  SCRIPT_CONTENT=$(cat <<EOF
+#!/bin/bash
+command="$TOOL_NAME \$@"
+flatpak-spawn --host bash --login -c "\$command"
+EOF
+)
 
   # Create the new script file with the tool name
   echo "$SCRIPT_CONTENT" > "$TOOL_NAME"
