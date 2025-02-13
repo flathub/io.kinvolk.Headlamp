@@ -1,8 +1,8 @@
 [
   {
     "type": "archive",
-    "url": "https://github.com/headlamp-k8s/headlamp/releases/download/v0.28.0/Headlamp-0.28.0-linux-x64.tar.gz",
-    "sha256": "4c1c443b49868e5ef25bd7054deaf213ef60efd3889a2ba8c31a58f431882626",
+    "url": "https://github.com/headlamp-k8s/headlamp/releases/download/v0.28.1/Headlamp-0.28.1-linux-x64.tar.gz",
+    "sha256": "c345b3e212f209cd41d028f5fa31dad5869cbc43e066ab9c50b0d79ef09caa94",
     "dest": "headlamp",
     "only-arches": [
       "x86_64"
