@@ -7,5 +7,14 @@
     "only-arches": [
       "x86_64"
     ]
+  },
+  {
+    "type": "archive",
+    "url": "https://github.com/headlamp-k8s/headlamp/releases/download/v0.29.0/Headlamp-0.29.0-linux-arm64.tar.gz",
+    "sha256": "1a649380358d51dbae889e0b1efa2297322b27592ea26cbd0d9c2cf9fc7698d7",
+    "dest": "headlamp",
+    "only-arches": [
+      "aarch64"
+    ]
   }
 ]
