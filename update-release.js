@@ -8,8 +8,8 @@ const APPDATA = 'io.kinvolk.Headlamp.appdata.xml';
 
 const arches = {
   'x86_64': 'x64',
+  'aarch64': 'arm64',
   // We will add these when we get to test them.
-  // 'aarch64': 'arm64',
   // 'arm': 'armv7l',
 }
 
