@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const {execSync} = require('child_process');
-const fetch = require('node-fetch');
 
 const HEADLAMP_SOURCE = 'headlamp-source.json';
 const APPDATA = 'io.kinvolk.Headlamp.appdata.xml';
