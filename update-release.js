@@ -20,7 +20,7 @@ const sourceFormat = {
 };
 
 async function fetchGithubReleaseInfo(tag) {
-  const res = await fetch(`https://api.github.com/repos/headlamp-k8s/headlamp/releases/tags/${tag}`)
+  const res = await fetch(`https://api.github.com/repos/kubernetes-sigs/headlamp/releases/tags/${tag}`)
   return await res.json();
 }
 
