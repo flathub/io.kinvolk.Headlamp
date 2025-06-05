@@ -37,7 +37,7 @@ jobs:
         GH_TOKEN: ${{ github.token }}
       run: |
         # Get the latest release info for the releases that start with a "v" (tags) and extract the tag_name from it.
-        HEADLAMP_VERSION=$(curl -X GET https://api.github.com/repos/headlamp-k8s/headlamp/releases/latest | jq  -r '[. |select(.tag_name|startswith("v"))] | .[0] | .tag_name')
+        HEADLAMP_VERSION=$(curl -X GET https://api.github.com/repos/kubernetes-sigs/headlamp/releases/latest | jq  -r '[. |select(.tag_name|startswith("v"))] | .[0] | .tag_name')
         user=$(git config --global user.name)
         git checkout -b "update_headlamp_$HEADLAMP_VERSION"
         node ./update-release.js $HEADLAMP_VERSION
