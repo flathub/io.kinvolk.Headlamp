@@ -59,7 +59,12 @@ function updateAppData(wantedVersion, publishDate) {
     process.exit(0);
   }
 
-  const newAppData = currentAppData.replace(/<releases>/, `<releases>\n    <release version="${versionWithoutV}" date="${publishDate}" />`);
+  const newRelease = `<releases>
+    <release version="${versionWithoutV}" date="${publishDate}">
+      <url type="details">https://github.com/kubernetes-sigs/headlamp/releases/tag/${wantedVersion}</url>
+    </release>`;
+
+  const newAppData = currentAppData.replace(/<releases>/, newRelease);
 
   fs.writeFileSync(APPDATA, newAppData);
   console.log(`Updated ${APPDATA} to ${wantedVersion}`);
