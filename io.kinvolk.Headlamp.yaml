@@ -25,6 +25,8 @@ finish-args:
 - --filesystem=~/.azure
 - --filesystem=~/.config/doctl
 - --filesystem=~/.config/gcloud
+# Tell electron to choose Wayland if it is available
+- --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 modules:
 - name: headlamp
   buildsystem: simple
