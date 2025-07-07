@@ -1,9 +1,9 @@
 app-id: io.kinvolk.Headlamp
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
-base-version: '23.08'
+base-version: '24.08'
 command: run-headlamp.sh
 separate-locales: false
 rename-desktop-file: headlamp.desktop
@@ -25,6 +25,8 @@ finish-args:
 - --filesystem=~/.azure
 - --filesystem=~/.config/doctl
 - --filesystem=~/.config/gcloud
+# Tell electron to choose Wayland if it is available
+- --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 modules:
 - name: headlamp
   buildsystem: simple
