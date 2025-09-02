@@ -27,6 +27,9 @@
   <launchable type="desktop-id">io.kinvolk.Headlamp.desktop</launchable>
 
   <releases>
+    <release version="0.35.0" date="2025-09-02">
+      <url type="details">https://github.com/kubernetes-sigs/headlamp/releases/tag/v0.35.0</url>
+    </release>
     <release version="0.34.0" date="2025-07-31">
       <url type="details">https://github.com/kubernetes-sigs/headlamp/releases/tag/v0.34.0</url>
     </release>
