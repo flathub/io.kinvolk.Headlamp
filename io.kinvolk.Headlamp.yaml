@@ -60,7 +60,7 @@ modules:
   buildsystem: simple
   build-options:
     env:
-      TOOLS_TO_WRAP: aliyunl;aws;az;doctl;gcloud;helm;ibmcloud;k3s;kind;kubectl;kubelogin;minikube;oc
+      TOOLS_TO_WRAP: aliyunl;aws;az;doctl;gcloud;helm;ibmcloud;k3s;kind;kubectl;kubelogin;minikube;oc;gke-gcloud-auth-plugin
   sources:
   - type: file
     path: ./setup-tool-wrapper.sh
