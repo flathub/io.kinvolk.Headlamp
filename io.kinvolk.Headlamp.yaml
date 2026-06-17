@@ -14,6 +14,13 @@ finish-args:
 - --socket=wayland
 - --device=dri
 - --share=network
+# The k8s-tools module installs host-forwarding wrappers (kubectl, kubelogin, az,
+# gcloud, doctl, etc.) that shell out to the user's host binaries via
+# `flatpak-spawn --host`. That call requires permission to talk to the Flatpak
+# portal; without it every wrapper fails with org.freedesktop.DBus.Error.ServiceUnknown,
+# breaking exec-credential auth (e.g. AKS + Azure AD via kubelogin). See
+# https://github.com/kubernetes-sigs/headlamp/issues/1341
+- --talk-name=org.freedesktop.Flatpak
 # We use .kube/config to know what clusters/contexts are set up
 - --filesystem=~/.kube/config
 # It's common to run minikube for experimenting, so it should be fine to read this dir
