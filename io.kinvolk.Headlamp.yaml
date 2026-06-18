@@ -8,6 +8,11 @@ command: run-headlamp.sh
 separate-locales: false
 rename-desktop-file: headlamp.desktop
 rename-icon: headlamp
+add-extensions:
+   io.kinvolk.Headlamp.Tools:
+     directory: tools
+     subdirectories: true
+     no-autodownload: true
 finish-args:
 - --share=ipc
 - --socket=x11
@@ -75,6 +80,7 @@ modules:
     dest-filename: run-headlamp.sh
     commands:
     # Use zypak to call the electron binary to enable sandboxing and prevents no sandbox error
+    - export PATH=$PATH:/app/tools
     - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
     - zypak-wrapper /app/headlamp-app/headlamp "$@"
   build-commands:
